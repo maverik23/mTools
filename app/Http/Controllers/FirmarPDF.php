@@ -62,7 +62,7 @@ class FirmarPDF extends Controller
                     if ($i == 1) {
                         if ($request->has('imagen')) {
                             if (auth()->user()->profile_photo_path) {
-                                $pdf->Image(public_path(auth()->user()->profile_photo_path), ($pdf->GetPageWidth() - 30) / 2, ($pdf->GetPageHeight() - 10) * 0.92, 20);
+                                $pdf->Image(public_path('storage/' . auth()->user()->profile_photo_path), ($pdf->GetPageWidth() - 30) / 2, ($pdf->GetPageHeight() - 10) * 0.92, 20);
                             }
                         }
                         if ($request->has('nombre')) {
@@ -82,7 +82,7 @@ class FirmarPDF extends Controller
 
                     if ($request->has('imagen')) {
                         if (auth()->user()->profile_photo_path) {
-                            $pdf->Image(public_path(auth()->user()->profile_photo_path), ($pdf->GetPageWidth() - 30) / 2, ($pdf->GetPageHeight() - 10) * 0.92, 20);
+                            $pdf->Image(public_path('storage/' . auth()->user()->profile_photo_path), ($pdf->GetPageWidth() - 30) / 2, ($pdf->GetPageHeight() - 10) * 0.92, 20);
                         }
                     }
                     if ($request->has('nombre')) {
