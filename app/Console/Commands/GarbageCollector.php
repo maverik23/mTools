@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Poliza;
+use App\Models\Soporte;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,14 +30,22 @@ class GarbageCollector extends Command
      */
     public function handle()
     {
+        $soportes = Soporte::where('created_at', '<=', now()->subMonth())->get();
+        foreach ($soportes as $poliza) {
+            $poliza->delete();
+        }
+        $this->info('se eliminaron ' . $soportes->count() . ' soportes');
+
+        $polizas = Poliza::where('created_at', '<=', now()->subMonth())->get();
+        foreach ($polizas as $poliza) {
+            $poliza->delete();
+        }
+        $this->info('se eliminaron ' . $polizas->count() . ' polizas');
+
         $folders = [
             'firmas_zip',
             'firmas-tmp',
             'livewire-tmp',
-            'polizas',
-            'polizas_zip',
-            'soportes',
-            'soportes_zip'
         ];
 
         foreach ($folders as $folder) {

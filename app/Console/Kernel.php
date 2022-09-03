@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('clean:files')->hourly();
+        $schedule->command('clean:files')->monthly();
     }
 
     /**
