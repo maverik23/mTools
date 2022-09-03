@@ -43,14 +43,14 @@ class FirmarPDF extends Controller
         ]);
 
         $files = [];
-
         foreach ($data['files'] as $file) {
             $path = $file->store('firmas-tmp');
             array_push($files, [$path => $file->getClientOriginalName()]);
             $pdf = new FPDI('l');
             $pagecount = $pdf->setSourceFile(storage_path('app/' . $path));
+
             if ($request->has('primera_pagina')) {
-                for ($i = 1; $i < $pagecount; $i++) {
+                for ($i = 1; $i <= $pagecount; $i++) {
                     $tpl = $pdf->importPage($i);
                     $specs = $pdf->getTemplateSize($tpl);
                     $pdf->AddPage($specs['orientation']);
@@ -71,7 +71,7 @@ class FirmarPDF extends Controller
                     }
                 }
             } else {
-                for ($i = 1; $i < $pagecount; $i++) {
+                for ($i = 1; $i <= $pagecount; $i++) {
                     $tpl = $pdf->importPage($i);
                     $specs = $pdf->getTemplateSize($tpl);
                     $pdf->AddPage($specs['orientation']);
