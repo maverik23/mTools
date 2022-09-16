@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\BaseExcelController;
 use App\Http\Controllers\FirmarPDF;
 use App\Http\Controllers\Polizas;
+use App\Http\Controllers\Renombrado;
 use App\Http\Controllers\Soportes;
 use App\Http\Livewire\Auth\Login;
 use App\Http\Livewire\Auth\Passwords\Confirm;
@@ -45,10 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::get('email/verify', Verify::class)
         ->middleware('throttle:6,1')
         ->name('verification.notice');
-
     Route::get('password/confirm', Confirm::class)
         ->name('password.confirm');
 
+    Route::resource('renombrado', Renombrado::class);
     Route::resource('soportes', Soportes::class);
     Route::get('soportes/zipDownload/{poliza}', [Soportes::class, 'zipDownload'])->name('soportes.zipDownload');
     Route::resource('polizas', Polizas::class);
