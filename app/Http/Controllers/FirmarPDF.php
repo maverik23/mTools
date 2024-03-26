@@ -128,6 +128,7 @@ class FirmarPDF extends Controller
         } else {
             return redirect(route('firmas-PDF.create'))->dangerBanner('Algo paso y no se pudo crear el archivo');
         }
+
         return Storage::download($zip_file);
     }
 }
