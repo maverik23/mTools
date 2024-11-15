@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Log;
 use ZipArchive;
 use Livewire\Component;
 use setasign\Fpdi\Fpdi;
@@ -81,6 +82,7 @@ class UploadFirmas extends Component
         }
 
         $zip = new ZipArchive;
+        Log::alert(storage_path('app/' . $zip_file));
         if ($zip->open(storage_path('app/' . $zip_file),  ZipArchive::CREATE)) {
             foreach ($files as $file) {
                 $zip->addFile(storage_path('app/' . key($file)), $file[key($file)]);
